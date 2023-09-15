@@ -18,7 +18,8 @@ namespace DotNetKoans.Engine
         public TypeInfo TypeInfo { get; }
         public MethodInfo MethodInfo { get; }
 
-        public string Name { get { return $"{TypeInfo.Name} {MethodInfo.Name}"; } }
+        public string Name => $"{TypeInfo.Name} {MethodInfo.Name}";
+
         public StepResult Meditate()
         {
             var koan = GetKoan();
@@ -59,7 +60,7 @@ namespace DotNetKoans.Engine
 
         public Koan GetKoan()
         {
-            return Instance ?? (Instance = Activator.CreateInstance(TypeInfo.AsType()) as Koan);
+            return Instance ??= Activator.CreateInstance(TypeInfo.AsType()) as Koan;
         }
     }
 
@@ -83,7 +84,10 @@ namespace DotNetKoans.Engine
             }
 
             console.WriteLine("Ponder the meaning in these lines:".Cyan());
-            console.WriteLine($"{String.Join('\n', Exception.GetStackTracePaths())}".Cyan());
+            console.WriteLine($"{string.Join('\n', Exception.GetStackTracePaths().Last())}\n".Cyan());
+            
+            console.WriteLine("And for further reading you could look at these lines from the xUnit Test Framework(not that this is necessary right now):".Cyan());
+            console.WriteLine($"{string.Join('\n', Exception.GetStackTracePaths().Reverse().Skip(1))}".Cyan());
         }
     }
 
