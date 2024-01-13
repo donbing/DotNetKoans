@@ -44,7 +44,7 @@ public class AboutDictionary : Koan
 		dict.Add("Japan", "Tokyo");
 
 		var key = "Jeff";
-		Assert.True(true, dict.ContainsKey(key).ToString()); // How to make this statement true?          
+		Assert.True(dict.ContainsKey(key)); // How to make this statement true?          
 	}
 
 	//Check if a value exists in Dictionary.
